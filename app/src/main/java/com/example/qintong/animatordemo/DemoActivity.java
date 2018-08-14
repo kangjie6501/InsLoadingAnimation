@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 import com.qintong.library.InsLoadingView;
+import com.qintong.library.InsLoadingView.Status;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
@@ -30,9 +31,13 @@ public class DemoActivity extends AppCompatActivity {
                         mInsLoadingView.setStatus(InsLoadingView.Status.CLICKED);
                         break;
                     case CLICKED:
-                        mInsLoadingView.setStatus(InsLoadingView.Status.UNCLICKED);
+                        mInsLoadingView.setStatus(InsLoadingView.Status.ACTIVITY);
+                        break;
+                    case ACTIVITY:
+                        mInsLoadingView.setStatus(Status.UNCLICKED);
+                        break;
                 }
-                Toast.makeText(DemoActivity.this,"click !", LENGTH_SHORT).show();
+                Toast.makeText(DemoActivity.this,mInsLoadingView.getStatus()+"", LENGTH_SHORT).show();
             }
         });
         mInsLoadingView.setOnLongClickListener(new View.OnLongClickListener() {

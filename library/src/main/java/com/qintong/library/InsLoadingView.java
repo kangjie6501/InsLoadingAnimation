@@ -33,18 +33,19 @@ public class InsLoadingView extends ImageView {
     private static final int MIN_WIDTH = 300;
     private static final float circleDia = 0.9f;
     private static final float strokeWidth = 0.025f;
-    private static final float arcChangeAngle = 0.2f;
+    private static final float arcChangeAngle = 0.3f;//0.2
     private static final int sClickedColor = Color.LTGRAY;
 
-    public enum Status {LOADING, CLICKED, UNCLICKED}
+    public enum Status {LOADING, CLICKED, UNCLICKED,ACTIVITY}
 
     private static SparseArray<Status> sStatusArray;
 
     static {
-        sStatusArray = new SparseArray<>(3);
+        sStatusArray = new SparseArray<>(4);
         sStatusArray.put(0, Status.LOADING);
         sStatusArray.put(1, Status.CLICKED);
         sStatusArray.put(2, Status.UNCLICKED);
+        sStatusArray.put(3, Status.ACTIVITY);
     }
 
     private Status mStatus = Status.LOADING;
@@ -146,8 +147,12 @@ public class InsLoadingView extends ImageView {
             case CLICKED:
                 drawClickedircle(canvas);
                 break;
+            case ACTIVITY:
+                drawActivity(canvas, mTrackPaint);
+                break;
         }
     }
+
 
     @Override
     protected void onVisibilityChanged(View changedView, int visibility) {
@@ -372,6 +377,18 @@ public class InsLoadingView extends ImageView {
                 canvas.drawArc(mTrackRectF, adjustCricleWidth, width, false, paint);
             }
         }
+    }
+
+    private void drawActivity(Canvas canvas, Paint paint) {
+        canvas.rotate(degress, centerX(), centerY());
+        canvas.rotate(ARC_WIDTH, centerX(), centerY());
+            float adjustCricleWidth =  360;
+            float width = 8;
+            while (adjustCricleWidth > ARC_WIDTH) {
+                adjustCricleWidth -= width*2;
+                //              圆            开始角度        旋转角度
+                canvas.drawArc(mTrackRectF, adjustCricleWidth, width, false, paint);
+            }
     }
 
     private void drawCircle(Canvas canvas, Paint paint) {
