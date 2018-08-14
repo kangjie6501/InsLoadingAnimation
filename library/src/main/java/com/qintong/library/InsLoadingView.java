@@ -414,6 +414,8 @@ public class InsLoadingView extends ImageView {
                 getHeight() * strokeWidth, mStartColor, mEndColor, CLAMP);
         paint.setShader(shader);
         setPaintStroke(paint);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+        paint.setStrokeJoin(Paint.Join.ROUND);
         return paint;
     }
 
