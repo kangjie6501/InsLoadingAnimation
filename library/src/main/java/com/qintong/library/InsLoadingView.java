@@ -433,6 +433,7 @@ public class InsLoadingView extends ImageView {
         setPaintStroke(paint);
         paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setAntiAlias(true);
         return paint;
     }
 
@@ -460,6 +461,7 @@ public class InsLoadingView extends ImageView {
         }
         tshader.setLocalMatrix(matrix);
         paint.setShader(tshader);
+        paint.setAntiAlias(true);
         return paint;
     }
 
